@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div>
+    <div class="container pt-4">
+        <div class="row p-0 mt-4">
+            <div class="col-lg-4 mx-auto shadow p-0">
+                <div class="alert-info">
+                    <h2>Add New Todo</h2>
+                </div>
+                <div class="p-4">
+                    <form action="/add-todo/" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <hr>
+                        <input type="submit" value="ADD" class="btn btn-info">
+                        </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="border">
+                    
+                    {% if todos|length == 0%}
+                    <div class="p-4">
+                        <br>
+                        <br>
+                        <div class="alert alert-info">
+                            <p class="" style="font-size: 30px text-center;"> No Todos</p>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+
+                    {% else %}
+                    <div>
+                        <table class="table">
+                            <thead >
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                    {% for todo in todos %}
+                                    <tr>
+
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{todo.title}}</td>
+                                    <td>
+                                        <!-- {{todo.is_completed}} -->
+                                        {% if todo.is_completed == 't'%}
+                                        <a href="change-status/{{todo.id}}/p" title="Completed" class="btn fa fa-check-circle-o"></a>
+                                        {%else%}
+                                        <a href="change-status/{{todo.id}}/t" title="Pending" class="btn fa fa-clock-o"></a>
+                                        {%endif%}
+                                    </td>
+                                    <td>{{todo.priority}}</td>
+                                    <td>
+                                        <a href="delete-todo/{{todo.id}}" title="Delete" class="btn fa fa-trash"></a>
+                                        <a href="update-todo/{{todo.id}}" title="Edit" class="btn fa fa-edit"></a>
+                                        <!-- {% if todo.is_completed == 't'%}
+                                        <a href="change-status/{{todo.id}}/p" title="Completed" class="btn fa fa-check-circle-o"></a>
+                                        {%else%}
+                                        <a href="change-status/{{todo.id}}/t" title="Pending" class="btn fa fa-clock-o"></a>
+                                        {%endif%} -->
+
+
+
+                                    </td>
+                                </tr>
+                                    {%endfor%}
+            
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {%endif%}
+
+                </div>
+            </div>
+        </div>
+      </div>
+   </div>
+{% endblock %}
+   
