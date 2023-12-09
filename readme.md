@@ -10,18 +10,18 @@
 
 
 1. Create a Virtual Environment
-### On Windows
+- **On Windows**
 - python -m venv venv
 
-### On macOS/Linux
+- **On macOS/Linux**
 - python3 -m venv venv
 
 
 2. Activate the Virtual Environment
-### On Windows
+-  **On Windows**
 - venv\Scripts\activate
 
-### On macOS/Linux
+-  **On macOS/Linux**
 - source venv/bin/activate
 
 
